@@ -1,60 +1,88 @@
 package classes;
 
+import java.util.HashMap;
+
+import main.Main;
+
 public class Utility {
 
-	// Transition model
-	private static final double PROB_STRAIGHT = 0.8;
-	private static final double PROB_LEFT = 0.1;
-	private static final double PROB_RIGHT = 0.1;
+	// Intended outcome's probability
+	private static final double PROB_INTENDED = 0.8;
+	private static final double PROB_RIGHT_ANGLED = 0.1;
 
-	public static ActionUtilityPair bestAction(CellType[][] maze, int locX, int locY) {
-		ActionUtilityPair pair;
-		double upUtility = moveAttempt(maze, Action.UP, locX, locY);
-		pair = new ActionUtilityPair(Action.UP, upUtility);
-		double downUtility = moveAttempt(maze, Action.DOWN, locX, locY);
-		if (pair.getUtility() < downUtility)
-			pair = new ActionUtilityPair(Action.DOWN, downUtility);
-		double leftUtility = moveAttempt(maze, Action.LEFT, locX, locY);
-		if (pair.getUtility() < leftUtility)
-			pair = new ActionUtilityPair(Action.LEFT, leftUtility);
-		double rightUtility = moveAttempt(maze, Action.RIGHT, locX, locY);
-		if (pair.getUtility() < rightUtility)
-			pair = new ActionUtilityPair(Action.RIGHT, rightUtility);
-		return pair;
+	// Agent's actions are trying to achieve (can be constructed by observing
+	// agent's preferences)
+	// U(s)
+
+	// Expected Utility = Utility function + Outcome Probabilities
+	// EU(a|e)
+	public void expectedUtility() {
+
 	}
 
-	public static double moveAttempt(CellType[][] maze, Action act, int locX, int locY) {
-		Action left;
-		Action right;
+	// Sum of rewards of individual states
+	public void utilitiesOfStateSeq(State[][] states) {
 
-		switch (act) {
+	}
+
+	// Expected utility obtained by policy starting in state
+	public void utilitiesOfState(State s) {
+
+	}
+
+	public static ActionUtilPair getBestAction(HashMap<State, Double> curUtilFunc, State s) {
+		double upUtil = getActionUtility(curUtilFunc, s, Action.UP);
+		double max = upUtil;
+		Action bestAct = Action.UP;
+		double downUtil = getActionUtility(curUtilFunc, s, Action.DOWN);
+		if (downUtil > max) {
+			max = downUtil;
+			bestAct = Action.DOWN;
+		}
+		double leftUtil = getActionUtility(curUtilFunc, s, Action.LEFT);
+		if (leftUtil > max) {
+			max = leftUtil;
+			bestAct = Action.LEFT;
+		}
+		double rightUtil = getActionUtility(curUtilFunc, s, Action.RIGHT);
+		if (rightUtil > max) {
+			max = rightUtil;
+			bestAct = Action.RIGHT;
+		}
+		return new ActionUtilPair(bestAct, max);
+	}
+
+	public static double getActionUtility(HashMap<State, Double> curUtilFunc, State s, Action a) {
+		Action leftAngled, rightAngled;
+		switch (a) {
 		case UP:
-			left = Action.LEFT;
-			right = Action.RIGHT;
+			leftAngled = Action.LEFT;
+			rightAngled = Action.RIGHT;
 			break;
 		case DOWN:
-			left = Action.RIGHT;
-			right = Action.LEFT;
+			leftAngled = Action.RIGHT;
+			rightAngled = Action.LEFT;
 			break;
 		case LEFT:
-			left = Action.DOWN;
-			right = Action.UP;
+			leftAngled = Action.DOWN;
+			rightAngled = Action.UP;
 			break;
 		case RIGHT:
-			left = Action.UP;
-			right = Action.DOWN;
+			leftAngled = Action.UP;
+			rightAngled = Action.DOWN;
 			break;
 		default:
-			return 0;
+			leftAngled = null;
+			rightAngled = null;
 		}
-
-		return PROB_STRAIGHT * move(maze, act, locX, locY) + PROB_LEFT * move(maze, left, locX, locY)
-				+ PROB_RIGHT * move(maze, right, locX, locY);
-	}
-
-	public static double move(CellType[][] maze, Action act, int locX, int locY) {
-		State state = new State(locX, locY);
-		state.move(act, maze);
-		return maze[state.getLocX()][state.getLocY()].value();
+		State intendedS = s.copy();
+		State leftAngledS = s.copy();
+		State rightAngledS = s.copy();
+		intendedS.move(Main.maze, a);
+		leftAngledS.move(Main.maze, leftAngled);
+		rightAngledS.move(Main.maze, rightAngled);
+		double balance = curUtilFunc.get(intendedS) * PROB_INTENDED + curUtilFunc.get(leftAngledS) * PROB_RIGHT_ANGLED
+				+ curUtilFunc.get(rightAngledS) * PROB_RIGHT_ANGLED;
+		return balance * Main.DISCOUNT_FACTOR + Main.maze[s.getCol()][s.getRow()].value();
 	}
 }

@@ -1,41 +1,60 @@
 package main;
 
-import classes.CellType;
+import java.util.HashMap;
+
+import classes.Reward;
 import classes.State;
+import classes.Utility;
 
 public class Main {
 
-	private static final double DISCOUNT_FACTOR = 0.99;
-	private static final double EPSILON = 0; // change this value
-	private static final double CONVERGENCE_CRITERIA = EPSILON * ((1.00 - DISCOUNT_FACTOR) / DISCOUNT_FACTOR); 
+	public static final double DISCOUNT_FACTOR = 0.99;
+	public static final double CONVERGENCE_CRITERIA = 0.175;
 
-	private static final CellType[][] maze = {
-			{ CellType.GREEN, CellType.WHITE, CellType.WHITE, CellType.WHITE, CellType.WHITE, CellType.WHITE },
-			{ CellType.WALLE, CellType.BROWN, CellType.WHITE, CellType.WHITE, CellType.WALLE, CellType.WHITE },
-			{ CellType.GREEN, CellType.WHITE, CellType.BROWN, CellType.WHITE, CellType.WALLE, CellType.WHITE },
-			{ CellType.WHITE, CellType.GREEN, CellType.WHITE, CellType.BROWN, CellType.WALLE, CellType.WHITE },
-			{ CellType.WHITE, CellType.WALLE, CellType.GREEN, CellType.WHITE, CellType.BROWN, CellType.WHITE },
-			{ CellType.GREEN, CellType.BROWN, CellType.WHITE, CellType.GREEN, CellType.WHITE, CellType.WHITE } };
+	public static final Reward[][] maze = {
+			{ Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE },
+			{ Reward.WALLE, Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE },
+			{ Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WHITE, Reward.WALLE, Reward.WHITE },
+			{ Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WALLE, Reward.WHITE },
+			{ Reward.WHITE, Reward.WALLE, Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WHITE },
+			{ Reward.GREEN, Reward.BROWN, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WHITE } };
 
-	public static void main(String[] args) {
+	public static void ValueIteration() {
+		HashMap<State, Double> curUtilFunc = new HashMap<State, Double>();
+		HashMap<State, Double> newUtilFunc = new HashMap<State, Double>();
 
-		State agent = new State(2, 3);
+		for (int col = 0; col < Main.maze.length; col++) {
+			for (int row = 0; row < Main.maze[col].length; row++) {
+				if (Main.maze[col][row] == Reward.WALLE)
+					continue;
+				newUtilFunc.put(new State(col, row), 0.0);
+			}
+		}
+
+		double maxDiff = Double.MIN_VALUE;
+		double minDiff = Double.MAX_VALUE;
+		do {
+			maxDiff = Double.MIN_VALUE;
+			minDiff = Double.MAX_VALUE;
+			curUtilFunc.clear();
+			curUtilFunc.putAll(newUtilFunc);
+			for (HashMap.Entry<State, Double> entry : curUtilFunc.entrySet()) {
+				State s = entry.getKey();
+				newUtilFunc.put(s, Utility.getBestAction(curUtilFunc, s).getUtil());
+				double newUtil = newUtilFunc.get(s);
+				double curUtil = curUtilFunc.get(s);
+				double diff = Math.abs(newUtil - curUtil);
+				maxDiff = Math.max(maxDiff, diff);
+				minDiff = Math.min(minDiff, diff);
+			}
+		} while ((maxDiff - minDiff) >= Main.CONVERGENCE_CRITERIA);
 		
-//		System.out.println("Starting State: (" + agent.getLocX() + "," + agent.getLocY() + ")");
-//		for (int i = 0; i < 50; i++) {
-//			ActionUtilityPair bestAction = Utility.bestAction(maze, agent.getLocX(), agent.getLocY());
-//			System.out.println("Action: " + bestAction.getAction());
-//			System.out.println("Utility: " + bestAction.getUtility());
-//			agent.move(bestAction.getAction(), maze);
-//			System.out.println("Current State: (" + agent.getLocX() + "," + agent.getLocY() + ")");
-//		}
-
-//		 for (int col = 0; col < maze[0].length; col++) {
-//		 for (int row = 0; row < maze.length; row++) {
-//		 System.out.print(maze[col][row].value() + " | ");
-//		 }
-//		 System.out.print("\n");
-//		 }
-
+		for (HashMap.Entry<State, Double> entry : newUtilFunc.entrySet()) {
+			System.out.println(entry.getKey().getString() + " " + entry.getValue());
+		}
+	}
+	
+	public static void main(String[] args) {
+		ValueIteration();
 	}
 }

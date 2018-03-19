@@ -1,48 +1,71 @@
 package classes;
 
+// Beginning with initial state s0
 public class State {
-	private int locX;
-	private int locY;
 
-	public State(int locX, int locY) {
-		this.locX = locX;
-		this.locY = locY;
+	private int col;
+	private int row;
+
+	public State(int col, int row) {
+		this.col = col;
+		this.row = row;
 	}
 
-	public int getLocX() {
-		return locX;
+	public State copy() {
+		return new State(this.col, this.row);
 	}
 
-	public void setLocX(int locX) {
-		this.locX = locX;
+	public int getCol() {
+		return col;
 	}
 
-	public int getLocY() {
-		return locY;
+	public void setCol(int col) {
+		this.col = col;
 	}
 
-	public void setLocY(int locY) {
-		this.locY = locY;
+	public int getRow() {
+		return row;
 	}
 
-	public void move(Action act, CellType[][] maze) {
-		switch (act) {
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void move(Reward[][] maze, Action a) {
+		switch (a) {
 		case UP:
-			if (locY > 0 && maze[locX][locY - 1] != CellType.WALLE)
-				locY -= 1;
+			if (row > 0 && maze[col][row - 1] != Reward.WALLE)
+				row -= 1;
 			break;
 		case DOWN:
-			if (locY < maze[0].length - 1 && maze[locX][locY + 1] != CellType.WALLE)
-				locY += 1;
+			if (row < maze[0].length - 1 && maze[col][row + 1] != Reward.WALLE)
+				row += 1;
 			break;
 		case LEFT:
-			if (locX > 0 && maze[locX - 1][locY] != CellType.WALLE)
-				locX -= 1;
+			if (col > 0 && maze[col - 1][row] != Reward.WALLE)
+				col -= 1;
 			break;
 		case RIGHT:
-			if (locX < maze.length - 1 && maze[locX + 1][locY] != CellType.WALLE)
-				locX += 1;
+			if (col < maze.length - 1 && maze[col + 1][row] != Reward.WALLE)
+				col += 1;
 			break;
 		}
+	}
+
+	public String getString() {
+		return "(" + col + "," + row + ")";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		State other = (State) obj;
+		if (col == other.col && row == other.row)
+			return true;
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return col * 31 + row;
 	}
 }
