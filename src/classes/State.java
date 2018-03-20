@@ -6,13 +6,12 @@ public class State {
 	private int col;
 	private int row;
 
+	public State() {
+	}
+
 	public State(int col, int row) {
 		this.col = col;
 		this.row = row;
-	}
-
-	public State copy() {
-		return new State(this.col, this.row);
 	}
 
 	public int getCol() {
@@ -52,7 +51,13 @@ public class State {
 		}
 	}
 
-	public String getString() {
+	@Override
+	protected State clone() {
+		return new State(this.col, this.row);
+	}
+
+	@Override
+	public String toString() {
 		return "(" + col + "," + row + ")";
 	}
 

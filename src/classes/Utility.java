@@ -30,21 +30,21 @@ public class Utility {
 
 	}
 
-	public static ActionUtilPair getBestAction(HashMap<State, Double> curUtilFunc, State s) {
-		double upUtil = getActionUtility(curUtilFunc, s, Action.UP);
+	public static ActionUtilPair getBestAction(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s) {
+		double upUtil = getActionUtility(maze, curUtilFunc, s, Action.UP);
 		double max = upUtil;
 		Action bestAct = Action.UP;
-		double downUtil = getActionUtility(curUtilFunc, s, Action.DOWN);
+		double downUtil = getActionUtility(maze, curUtilFunc, s, Action.DOWN);
 		if (downUtil > max) {
 			max = downUtil;
 			bestAct = Action.DOWN;
 		}
-		double leftUtil = getActionUtility(curUtilFunc, s, Action.LEFT);
+		double leftUtil = getActionUtility(maze, curUtilFunc, s, Action.LEFT);
 		if (leftUtil > max) {
 			max = leftUtil;
 			bestAct = Action.LEFT;
 		}
-		double rightUtil = getActionUtility(curUtilFunc, s, Action.RIGHT);
+		double rightUtil = getActionUtility(maze, curUtilFunc, s, Action.RIGHT);
 		if (rightUtil > max) {
 			max = rightUtil;
 			bestAct = Action.RIGHT;
@@ -52,7 +52,8 @@ public class Utility {
 		return new ActionUtilPair(bestAct, max);
 	}
 
-	public static double getActionUtility(HashMap<State, Double> curUtilFunc, State s, Action a) {
+	public static double getActionUtility(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s,
+			Action a) {
 		Action leftAngled, rightAngled;
 		switch (a) {
 		case UP:
@@ -75,14 +76,15 @@ public class Utility {
 			leftAngled = null;
 			rightAngled = null;
 		}
-		State intendedS = s.copy();
-		State leftAngledS = s.copy();
-		State rightAngledS = s.copy();
-		intendedS.move(Main.maze, a);
-		leftAngledS.move(Main.maze, leftAngled);
-		rightAngledS.move(Main.maze, rightAngled);
-		double balance = curUtilFunc.get(intendedS) * PROB_INTENDED + curUtilFunc.get(leftAngledS) * PROB_RIGHT_ANGLED
-				+ curUtilFunc.get(rightAngledS) * PROB_RIGHT_ANGLED;
-		return balance * Main.DISCOUNT_FACTOR + Main.maze[s.getCol()][s.getRow()].value();
+		State intendedS = s.clone();
+		State leftAngledS = s.clone();
+		State rightAngledS = s.clone();
+		intendedS.move(maze, a);
+		leftAngledS.move(maze, leftAngled);
+		rightAngledS.move(maze, rightAngled);
+		double balance = curUtilFunc.get(intendedS).getUtil() * PROB_INTENDED
+				+ curUtilFunc.get(leftAngledS).getUtil() * PROB_RIGHT_ANGLED
+				+ curUtilFunc.get(rightAngledS).getUtil() * PROB_RIGHT_ANGLED;
+		return balance * Main.DISCOUNT_FACTOR + maze[s.getCol()][s.getRow()].value();
 	}
 }
