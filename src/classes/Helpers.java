@@ -8,6 +8,11 @@ import java.util.HashMap;
 
 import main.Main;
 
+/**
+ * Helpers for printing and writing to file.
+ * @author Sherry Lau Geok Teng
+ *
+ */
 public class Helpers {
 
 	private static final String TOP_LEFT_JOINT = "┌";

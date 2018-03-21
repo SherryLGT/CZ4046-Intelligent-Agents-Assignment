@@ -1,5 +1,10 @@
 package classes;
 
+/**
+ * Encapsulate Action and Utility (double) value.
+ * @author Sherry Lau Geok Teng
+ *
+ */
 public class ActionUtilPair {
 
 	private Action act;
@@ -29,6 +34,9 @@ public class ActionUtilPair {
 		this.util = util;
 	}
 
+	/**
+	 * Creates and return a copy of ActionUtilPair object with the Action and Utility (double) value
+	 */
 	@Override
 	public ActionUtilPair clone() {
 		return new ActionUtilPair(act, util);

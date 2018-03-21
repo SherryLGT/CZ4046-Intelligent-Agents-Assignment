@@ -10,14 +10,21 @@ import classes.Reward;
 import classes.State;
 import classes.Utility;
 
+/**
+ * Main class with value and policy iteration.
+ * @author Sherry Lau Geok Teng
+ *
+ */
 public class Main {
 
 	public static final double DISCOUNT_FACTOR = 0.99;
 	public static final double CONVERGENCE_CRITERIA = 0.175;
 	public static final int BELLMAN_UPDATE_COUNT = 10;
 
+	// Output file name
 	public static final String FILE_NAME = "output.txt";
 
+	// Given maze environment
 	public static final Reward[][] maze1 = {
 			{ Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE },
 			{ Reward.WALLE, Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE },
@@ -26,6 +33,10 @@ public class Main {
 			{ Reward.WHITE, Reward.WALLE, Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WHITE },
 			{ Reward.GREEN, Reward.BROWN, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WHITE } };
 
+	/**
+	 * 
+	 * @param maze
+	 */
 	public static void valueIteration(Reward[][] maze) {
 		HashMap<State, ActionUtilPair> curUtilFunc = new HashMap<State, ActionUtilPair>();
 		HashMap<State, ActionUtilPair> newUtilFunc = new HashMap<State, ActionUtilPair>();

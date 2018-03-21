@@ -1,6 +1,10 @@
 package classes;
 
-// Beginning with initial state s0
+/**
+ * Position in the maze grid (by column and row).
+ * @author Sherry Lau Geok Teng
+ *
+ */
 public class State {
 
 	private int col;
@@ -29,7 +33,12 @@ public class State {
 	public void setRow(int row) {
 		this.row = row;
 	}
-
+	
+	/**
+	 * Change position according to action direction as long as the resulting position is not a wall
+	 * @param maze Maze environment
+	 * @param a Action 
+	 */
 	public void move(Reward[][] maze, Action a) {
 		switch (a) {
 		case UP:
@@ -51,16 +60,25 @@ public class State {
 		}
 	}
 
+	/**
+	 * Creates and return a copy of State object with the column and row value
+	 */
 	@Override
 	protected State clone() {
 		return new State(this.col, this.row);
 	}
 
+	/**
+	 * Format string to (col,row) format
+	 */
 	@Override
 	public String toString() {
 		return "(" + col + "," + row + ")";
 	}
 
+	/**
+	 * Compares if the two objects has the same column and row
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		State other = (State) obj;
@@ -68,7 +86,7 @@ public class State {
 			return true;
 		return false;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return col * 31 + row;

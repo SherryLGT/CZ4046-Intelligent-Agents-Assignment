@@ -4,32 +4,26 @@ import java.util.HashMap;
 
 import main.Main;
 
+/**
+ * Calculate utilities.
+ * @author Sherry Lau Geok Teng
+ *
+ */
 public class Utility {
 
-	// Intended outcome's probability
+	// Intended outcome probability
 	private static final double PROB_INTENDED = 0.8;
+	// Probablity of moving right angle to the intended
 	private static final double PROB_RIGHT_ANGLED = 0.1;
 
-	// Agent's actions are trying to achieve (can be constructed by observing
-	// agent's preferences)
-	// U(s)
-
-	// Expected Utility = Utility function + Outcome Probabilities
-	// EU(a|e)
-	public void expectedUtility() {
-
-	}
-
-	// Sum of rewards of individual states
-	public void utilitiesOfStateSeq(State[][] states) {
-
-	}
-
-	// Expected utility obtained by policy starting in state
-	public void utilitiesOfState(State s) {
-
-	}
-
+	/**
+	 * Get the best action to take according to the highest utilities
+	 * Use of getActionUtility method to calculate the utility of the respective action
+	 * @param maze
+	 * @param curUtilFunc
+	 * @param s
+	 * @return
+	 */
 	public static ActionUtilPair getBestAction(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s) {
 		double upUtil = getActionUtility(maze, curUtilFunc, s, Action.UP);
 		double max = upUtil;
@@ -52,9 +46,17 @@ public class Utility {
 		return new ActionUtilPair(bestAct, max);
 	}
 
-	public static double getActionUtility(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s,
-			Action a) {
+	/**
+	 * Get utility of the respective action
+	 * @param maze
+	 * @param curUtilFunc
+	 * @param s
+	 * @param a
+	 * @return
+	 */
+	public static double getActionUtility(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s,	Action a) {
 		Action leftAngled, rightAngled;
+		// Change respective direction according to the action taken
 		switch (a) {
 		case UP:
 			leftAngled = Action.LEFT;
@@ -82,9 +84,11 @@ public class Utility {
 		intendedS.move(maze, a);
 		leftAngledS.move(maze, leftAngled);
 		rightAngledS.move(maze, rightAngled);
+		// Calculate the expected utility
 		double balance = curUtilFunc.get(intendedS).getUtil() * PROB_INTENDED
 				+ curUtilFunc.get(leftAngledS).getUtil() * PROB_RIGHT_ANGLED
 				+ curUtilFunc.get(rightAngledS).getUtil() * PROB_RIGHT_ANGLED;
+		// Utility of individual state reward discounted by the discount factor
 		return balance * Main.DISCOUNT_FACTOR + maze[s.getCol()][s.getRow()].value();
 	}
 }
