@@ -1,7 +1,7 @@
 package classes;
 
 /**
- * Encapsulate Action and Utility (double) value.
+ * Encapsulate Action (movement direction) and Utility (double) value.
  * @author Sherry Lau Geok Teng
  *
  */

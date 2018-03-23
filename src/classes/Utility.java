@@ -5,7 +5,7 @@ import java.util.HashMap;
 import main.Main;
 
 /**
- * Calculate utilities.
+ * Calculate optimal utilities of all and respective states.
  * @author Sherry Lau Geok Teng
  *
  */
@@ -13,16 +13,16 @@ public class Utility {
 
 	// Intended outcome probability
 	private static final double PROB_INTENDED = 0.8;
-	// Probablity of moving right angle to the intended
+	// Probability of moving right angle to the intended
 	private static final double PROB_RIGHT_ANGLED = 0.1;
 
 	/**
 	 * Get the best action to take according to the highest utilities
 	 * Use of getActionUtility method to calculate the utility of the respective action
-	 * @param maze
-	 * @param curUtilFunc
-	 * @param s
-	 * @return
+	 * @param maze Maze environment (reward values)
+	 * @param curUtilFunc Hashmap of all State (column,row) and ActionUtilPair (movement direction and utility value)
+	 * @param s Initial state
+	 * @return The optimal movement direction and its utility
 	 */
 	public static ActionUtilPair getBestAction(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s) {
 		double upUtil = getActionUtility(maze, curUtilFunc, s, Action.UP);
@@ -48,11 +48,11 @@ public class Utility {
 
 	/**
 	 * Get utility of the respective action
-	 * @param maze
-	 * @param curUtilFunc
-	 * @param s
-	 * @param a
-	 * @return
+	 * @param maze Maze environment (reward values)
+	 * @param curUtilFunc Hashmap of all State (column,row) and ActionUtilPair (movement direction and utility value)
+	 * @param s Initial state
+	 * @param a Specific movement direction
+	 * @return Utility of state
 	 */
 	public static double getActionUtility(Reward[][] maze, HashMap<State, ActionUtilPair> curUtilFunc, State s,	Action a) {
 		Action leftAngled, rightAngled;
@@ -78,9 +78,11 @@ public class Utility {
 			leftAngled = null;
 			rightAngled = null;
 		}
+		// Copy of initial state
 		State intendedS = s.clone();
 		State leftAngledS = s.clone();
 		State rightAngledS = s.clone();
+		// Gets the change of state according to action (movement direction)
 		intendedS.move(maze, a);
 		leftAngledS.move(maze, leftAngled);
 		rightAngledS.move(maze, rightAngled);

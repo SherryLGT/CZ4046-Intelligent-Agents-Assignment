@@ -36,8 +36,8 @@ public class State {
 	
 	/**
 	 * Change position according to action direction as long as the resulting position is not a wall
-	 * @param maze Maze environment
-	 * @param a Action 
+	 * @param maze Maze environment (reward values)
+	 * @param a Movement direction
 	 */
 	public void move(Reward[][] maze, Action a) {
 		switch (a) {
@@ -69,7 +69,7 @@ public class State {
 	}
 
 	/**
-	 * Format string to (col,row) format
+	 * Format string to (column,row) format
 	 */
 	@Override
 	public String toString() {
