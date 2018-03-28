@@ -35,6 +35,69 @@ public class Main {
 			{ Reward.WHITE, Reward.WALLE, Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WHITE },
 			{ Reward.GREEN, Reward.BROWN, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WHITE } };
 
+	// Complicated maze environment
+	public static final Reward[][] maze2 = {
+			{ Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.GREEN, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.BROWN, Reward.BROWN, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.BROWN, Reward.BROWN, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.GREEN, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WHITE, Reward.BROWN, Reward.WHITE, Reward.BROWN, Reward.WALLE },
+			{ Reward.WHITE, Reward.BROWN, Reward.WALLE, Reward.WALLE, Reward.BROWN, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.BROWN, Reward.BROWN, Reward.WHITE,
+					Reward.BROWN, Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.BROWN, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.GREEN, Reward.GREEN, Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.BROWN, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WALLE,
+					Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WHITE,
+					Reward.WHITE, Reward.BROWN, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WALLE, Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE,
+					Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.BROWN, Reward.BROWN, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.GREEN,
+					Reward.GREEN, Reward.WHITE, Reward.WALLE, Reward.GREEN, Reward.GREEN, Reward.WALLE },
+			{ Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.BROWN, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.GREEN,
+					Reward.BROWN, Reward.GREEN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WHITE,
+					Reward.WHITE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.GREEN,
+					Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.BROWN, Reward.WHITE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WALLE, Reward.WALLE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WALLE,
+					Reward.WALLE, Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.GREEN, Reward.WALLE,
+					Reward.WALLE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.BROWN, Reward.WHITE, Reward.WHITE, Reward.WHITE, Reward.WALLE, Reward.WHITE, Reward.WHITE,
+					Reward.WHITE, Reward.WHITE, Reward.GREEN, Reward.GREEN, Reward.GREEN, Reward.BROWN, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE },
+			{ Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WHITE, Reward.BROWN, Reward.WHITE, Reward.BROWN, Reward.WALLE,
+					Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE, Reward.WALLE } };
+
 	/**
 	 * Value iteration for computing MDP values
 	 * @param maze Maze environment (reward values)
@@ -161,20 +224,37 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[][] mazeStr = new String[maze1.length][maze1[0].length];
+		String[][] mazeStr1 = new String[maze1.length][maze1[0].length];
 		for (int i = 0; i < maze1.length; i++) {
 			for (int j = 0; j < maze1[i].length; j++) {
 				if (maze1[i][j] == Reward.WALLE)
-					mazeStr[i][j] = null;
+					mazeStr1[i][j] = null;
 				else
-					mazeStr[i][j] = String.format("%.2f", maze1[i][j].value());
+					mazeStr1[i][j] = String.format("%.2f", maze1[i][j].value());
 			}
 		}
 		output("=========== Default Maze Environment ===========\r\n");
-		output(Helpers.arrayToStr(mazeStr));
+		output(Helpers.arrayToStr(mazeStr1));
 		output("\r\n================================ Performing Value Iteration ================================");
 		valueIteration(maze1);
 		output("\r\n============================= Performing Policy Iteration =============================");
 		policyIteration(maze1);
+
+		// Part 2
+		String[][] mazeStr2 = new String[maze2.length][maze2[0].length];
+		for (int i = 0; i < maze2.length; i++) {
+			for (int j = 0; j < maze2[i].length; j++) {
+				if (maze2[i][j] == Reward.WALLE)
+					mazeStr2[i][j] = null;
+				else
+					mazeStr2[i][j] = String.format("%.2f", maze2[i][j].value());
+			}
+		}
+		output("\r\n\r\n=========== Default Maze 2 Environment ===========\r\n");
+		output(Helpers.arrayToStr(mazeStr2));
+		output("\r\n================================ Performing Maze 2 Value Iteration ================================");
+		valueIteration(maze2);
+		output("\r\n============================= Performing Maze 2 Policy Iteration =============================");
+		policyIteration(maze2);
 	}
 }
